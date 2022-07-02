@@ -1,9 +1,32 @@
 import { format, parseISO } from "date-fns";
 import { de } from "date-fns/locale";
+import { useState } from "react";
 
 function Event({ event }) {
+  const [textIsOpen, setTextIsOpen] = useState(false);
+
+  let description = "";
+
+  console.log(event.description);
+  if (event.description.includes("Mehr anzeigen")) {
+    description = event.description.substring(
+      0,
+      event.description.indexOf("Mehr anzeigen")
+    );
+  } else if (event.description.includes("Weniger anzeigen")) {
+    description = event.description.substring(
+      0,
+      event.description.indexOf("Weniger anzeigen")
+    );
+  } else {
+    description = event.description;
+  }
+
+  const longText = description;
+  const shortText = description.substring(0, 300);
+
   return (
-    <div>
+    <div className="Moin">
       <ul className="text-amber-600">
         {event.endTime ? (
           <li>
@@ -17,7 +40,7 @@ function Event({ event }) {
             {format(parseISO(event.startDate), "EEEE, dd. MMMM yyyy", {
               locale: de,
             })}{" "}
-            um {event.startTime} Uhr
+            um {event.startTime}
           </li>
         )}
       </ul>
@@ -25,9 +48,37 @@ function Event({ event }) {
       <ul className="mb-2">
         <li className="text-sm text-gray-400/90">{event.location}</li>
       </ul>
-      <p className="text-gray-600 mb-6">
-        {event.description.substring(0, 300)}...
-      </p>
+
+      {/* <p className="text-gray-600">{textIsOpen ? longText : shortText}</p> */}
+      {textIsOpen && event.description.length > 300 ? (
+        <>
+          <p className="transition ease-in-out delay-150 whitespace-pre-wrap">
+            {longText}
+          </p>
+          <button
+            className="font-bold"
+            onClick={() => setTextIsOpen(!textIsOpen)}
+          >
+            Weniger anzeigen
+          </button>
+        </>
+      ) : (
+        <>
+          <p className="transition ease-in-out delay-150 whitespace-pre-wrap">
+            {shortText}
+          </p>
+          {event.description.length > 300 ? (
+            <button
+              className="font-bold"
+              onClick={() => setTextIsOpen(!textIsOpen)}
+            >
+              Mehr anzeigen
+            </button>
+          ) : (
+            ""
+          )}
+        </>
+      )}
     </div>
   );
 }

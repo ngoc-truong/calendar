@@ -74,13 +74,13 @@ export default function App() {
               </button>
             </div>
             <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
-              <div>Mo</div>
-              <div>Di</div>
-              <div>Mi</div>
-              <div>Do</div>
-              <div>Fr</div>
-              <div>Sa</div>
-              <div>So</div>
+              <div>MO</div>
+              <div>DI</div>
+              <div>MI</div>
+              <div>DO</div>
+              <div>FR</div>
+              <div>SA</div>
+              <div>SO</div>
             </div>
             <div className="grid grid-cols-7 mt-2 text-sm">
               {days.map((day, dayIdx) => (
@@ -128,7 +128,7 @@ export default function App() {
                     {events.some((event) =>
                       isSameDay(parseISO(event.startDate), day)
                     ) && (
-                      <div className="w-1 h-1 rounded-full bg-sky-500"></div>
+                      <div className="w-1 h-1 rounded-full bg-indigo-500"></div>
                     )}
                   </div>
                 </div>
@@ -142,15 +142,16 @@ export default function App() {
                 {format(selectedDay, "d. MMMM yyy", { locale: de })}
               </time>
             </h2>
-            <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+            <div className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
               {selectedDayEvents.length > 0 ? (
                 selectedDayEvents.map((event) => <Event event={event} />)
               ) : (
-                <p>
-                  Keine Lindy-Veranstaltungen heute :(. Keep on solo jazzin'
-                </p>
+                <>
+                  <p>Keine Lindy-Veranstaltungen heute</p>
+                  <p>Aber Solo Jazz ist auch mal nett!</p>
+                </>
               )}
-            </ol>
+            </div>
           </section>
         </div>
       </div>
