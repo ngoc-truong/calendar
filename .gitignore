@@ -25,3 +25,4 @@ yarn-error.log*
 
 lindy-events.json
 src/lindy-events.json
+db.json

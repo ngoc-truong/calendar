@@ -1,4 +1,4 @@
-import events from "./lindy-events.json";
+import lindyEvents from "./db.json";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import {
   add,
@@ -15,8 +15,11 @@ import {
   startOfToday,
 } from "date-fns";
 import { de } from "date-fns/locale";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Event from "./components/Event";
+import EventForm from "./components/EventForm";
+import { Drawer } from "@mui/material";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -26,6 +29,9 @@ export default function App() {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
+  let [events, setEvents] = useState(lindyEvents.events);
+  let [openNewEventDrawer, setOpenNewEventDrawer] = useState(false);
+  let [openEditEventDrawer, setOpenEditEventDrawer] = useState(false);
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
   let days = eachDayOfInterval({
@@ -46,6 +52,12 @@ export default function App() {
   let selectedDayEvents = events.filter((event) =>
     isSameDay(parseISO(event.startDate), selectedDay)
   );
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/events`).then((response) => {
+      setEvents(response.data);
+    });
+  }, []);
 
   return (
     <div className="pt-16">
@@ -98,7 +110,7 @@ export default function App() {
                       isEqual(day, selectedDay) && "text-white",
                       !isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "text-amber-600",
+                        "text-amber-600 ",
                       !isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         isSameMonth(day, firstDayCurrentMonth) &&
@@ -109,7 +121,7 @@ export default function App() {
                         "text-gray-400",
                       isEqual(day, selectedDay) &&
                         isToday(day) &&
-                        "bg-amber-500",
+                        "bg-amber-500 hover:bg-amber-700",
                       isEqual(day, selectedDay) &&
                         !isToday(day) &&
                         "bg-gray-900",
@@ -136,6 +148,26 @@ export default function App() {
             </div>
           </div>
           <section className="mt-12 md:mt-0 md:pl-14">
+            <div>
+              <button
+                onClick={() => setOpenNewEventDrawer(true)}
+                className="bg-amber-500 px-4 py-1 rounded font-bold text-white text-sm mb-4 hover:bg-amber-700"
+              >
+                Neue Veranstaltung
+              </button>
+              <Drawer
+                open={openNewEventDrawer}
+                anchor={"right"}
+                onClose={() => setOpenNewEventDrawer(false)}
+              >
+                <EventForm
+                  selectedDay={selectedDay}
+                  events={events}
+                  setEvents={setEvents}
+                  setOpenNewEventDrawer={setOpenNewEventDrawer}
+                />
+              </Drawer>
+            </div>
             <h2 className="font-semibold text-gray-900">
               Veranstaltungen am{" "}
               <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
@@ -144,11 +176,20 @@ export default function App() {
             </h2>
             <div className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
               {selectedDayEvents.length > 0 ? (
-                selectedDayEvents.map((event) => <Event event={event} />)
+                selectedDayEvents.map((event) => (
+                  <Event
+                    key={event.id}
+                    id={event.id}
+                    event={event}
+                    events={events}
+                    setEvents={setEvents}
+                    openEditEventDrawer={openEditEventDrawer}
+                    setOpenEditEventDrawer={setOpenEditEventDrawer}
+                  />
+                ))
               ) : (
                 <>
-                  <p>Keine Lindy-Veranstaltungen heute</p>
-                  <p>Aber Solo Jazz ist auch mal nett!</p>
+                  <p>Keine Lindy-Veranstaltungen heute 🥺</p>
                 </>
               )}
             </div>
