@@ -1,7 +1,7 @@
 import { format, parseISO } from "date-fns";
 import { de } from "date-fns/locale";
 import { useState } from "react";
-import { Drawer, Menu, MenuItem } from "@mui/material";
+import { Drawer, Divider, Menu, MenuItem } from "@mui/material";
 import axios from "axios";
 import EditEventForm from "./EditEventForm";
 import {
@@ -74,7 +74,8 @@ function Event({
   const shortText = description.substring(0, 300);
 
   return (
-    <div>
+    // <div className="bg-white rounded-lg drop-shadow-2xl p-8 mb-8 bg-opacity-70 backdrop-blur-2xl border-white border">
+    <div className="bg-white p-8 rounded-lg drop-shadow-2xl border-white border">
       <Drawer
         open={openEditEventDrawer}
         anchor={"right"}
@@ -88,8 +89,8 @@ function Event({
         />
       </Drawer>
       <div className="flex justify-between items-start">
-        <div>
-          <ul className="text-amber-600">
+        <div className="mb-2">
+          <ul className="text-blue-700 font-semibold">
             {event.endTime ? (
               <li>
                 {format(parseISO(event.startDate), "EEEE, dd. MMMM yyyy", {
@@ -106,11 +107,14 @@ function Event({
               </li>
             )}
           </ul>
-          <h2 className="font-bold text text-gray-700">{event.title}</h2>
+          <h2 className="py-2 font-semibold text-xl text-gray-900">
+            {event.title}
+          </h2>
           <ul className="mb-2">
-            <li className="text-sm text-gray-400/90">{event.location}</li>
+            <li className="text-gray-500 font-semibold">{event.location}</li>
           </ul>
         </div>
+
         <button onClick={handleClick}>
           <DotsVerticalIcon className="w-5 h-5" />
         </button>
@@ -119,14 +123,16 @@ function Event({
           <MenuItem onClick={deleteEvent}>Löschen</MenuItem>
         </Menu>
       </div>
+      <Divider />
       {/* <p className="text-gray-600">{textIsOpen ? longText : shortText}</p> */}
       {textIsOpen && event.description.length > 300 ? (
         <>
-          <p className="transition ease-in-out delay-150 whitespace-pre-wrap">
+          <p className="transition ease-in-out delay-150 whitespace-pre-wrap text-gray-600 my-4">
             {longText}
           </p>
+
           <button
-            className="font-bold mr-2 mb-4 flex items-center"
+            className="font-bold mr-2 mt-4 flex items-center"
             onClick={() => setTextIsOpen(!textIsOpen)}
           >
             Weniger anzeigen
@@ -135,12 +141,13 @@ function Event({
         </>
       ) : (
         <>
-          <p className="transition ease-in-out delay-150 whitespace-pre-wrap">
+          <p className="transition ease-in-out delay-150 whitespace-pre-wrap text-gray-600 my-4">
             {shortText}
           </p>
+
           {event.description.length > 300 ? (
             <button
-              className="font-bold mr-2 mb-4 flex items-center"
+              className="font-semibold mr-2 mt-4 flex items-center"
               onClick={() => setTextIsOpen(!textIsOpen)}
             >
               Mehr anzeigen{" "}

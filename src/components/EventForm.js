@@ -145,7 +145,7 @@ function EventForm({ selectedDay, events, setEvents, setOpenNewEventDrawer }) {
         </label>
       </div>
       <input
-        className="bg-amber-500 px-4 py-1 rounded font-bold text-white text-sm mb-4 hover:bg-amber-700"
+        className="transition ease-in-out delay-100 bg-blue-700 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 px-4 py-1 rounded font-bold text-white text-sm"
         type="submit"
         value="Hinzufügen"
       />
