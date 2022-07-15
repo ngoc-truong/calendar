@@ -23,6 +23,8 @@ import { Drawer } from "@mui/material";
 import NavBar from "./components/NavBar";
 import lindyIllustration from "./assets/lindy-background.PNG";
 import background from "./assets/dance-shoes.jpg";
+import SignUp from "./components/Signup";
+import Login from "./components/Login";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -35,6 +37,8 @@ export default function App() {
   let [events, setEvents] = useState(lindyEvents.events);
   let [openNewEventDrawer, setOpenNewEventDrawer] = useState(false);
   let [openEditEventDrawer, setOpenEditEventDrawer] = useState(false);
+  const [user, setUser] = useState(null);
+
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
   let days = eachDayOfInterval({
@@ -62,6 +66,14 @@ export default function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedInUser");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+  }, []);
+
   return (
     <div
       // style={{
@@ -74,10 +86,11 @@ export default function App() {
       className="bg-gradient-to-r from-gray-100 to-gray-400 h-full"
     >
       <NavBar
+        user={user}
+        setUser={setUser}
         setOpenNewEventDrawer={setOpenNewEventDrawer}
         background={lindyIllustration}
       />
-
       <div>
         <div className="grid grid-cols-3 p-12 gap-x-8 font">
           <div>
@@ -187,6 +200,7 @@ export default function App() {
               {selectedDayEvents.length > 0 ? (
                 selectedDayEvents.map((event) => (
                   <Event
+                    user={user}
                     key={event.id}
                     id={event.id}
                     event={event}

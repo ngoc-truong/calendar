@@ -10,14 +10,15 @@ import {
   DotsVerticalIcon,
 } from "@heroicons/react/solid";
 
-function Event({
+const Event = ({
+  user,
   event,
   id,
   events,
   setEvents,
   openEditEventDrawer,
   setOpenEditEventDrawer,
-}) {
+}) => {
   const [textIsOpen, setTextIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const menuOpen = Boolean(anchorEl);
@@ -115,13 +116,17 @@ function Event({
           </ul>
         </div>
 
-        <button onClick={handleClick}>
-          <DotsVerticalIcon className="w-5 h-5" />
-        </button>
-        <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
-          <MenuItem onClick={editEvent}>Ändern</MenuItem>
-          <MenuItem onClick={deleteEvent}>Löschen</MenuItem>
-        </Menu>
+        {user !== null && (
+          <>
+            <button onClick={handleClick}>
+              <DotsVerticalIcon className="w-5 h-5" />
+            </button>
+            <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
+              <MenuItem onClick={editEvent}>Ändern</MenuItem>
+              <MenuItem onClick={deleteEvent}>Löschen</MenuItem>
+            </Menu>
+          </>
+        )}
       </div>
       <Divider />
       {/* <p className="text-gray-600">{textIsOpen ? longText : shortText}</p> */}
@@ -160,6 +165,6 @@ function Event({
       )}
     </div>
   );
-}
+};
 
 export default Event;
