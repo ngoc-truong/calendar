@@ -55,6 +55,11 @@ code {
 
 .background {
   background-color: #efefef;
+  height: 100%;
+}
+
+.background-color {
+  background-color: #efefef;
 }
 
 .card {

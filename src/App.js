@@ -72,7 +72,7 @@ export default function App() {
       />
 
       <div>
-        <div className="grid grid-cols-3 p-12 gap-x-8 font">
+        <div className="background-color grid grid-cols-3 p-12 gap-x-8 font">
           <Calendar
             firstDayCurrentMonth={firstDayCurrentMonth}
             previousMonth={previousMonth}
