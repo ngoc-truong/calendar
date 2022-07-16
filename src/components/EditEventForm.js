@@ -48,11 +48,11 @@ function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
   };
 
   return (
-    <form className="m-10 w-96" onSubmit={updateEvent}>
-      <h1 className="font-semibold text-gray-900">"{title}" ändern</h1>
+    <form className="font m-10 w-96" onSubmit={updateEvent}>
+      <h1 className="headline">"{title}" ändern</h1>
       <div className="my-6">
         <label>
-          <span className="text-gray-500 text-xs font-bold ">Titel</span>
+          <span className="input-headline">Titel</span>
           <br></br>
           <input
             className="bg-gray-100 rounded py-2 px-4 w-full"
@@ -65,7 +65,7 @@ function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
       </div>
       <div className="grid grid-cols-2 gap-y-2 gap-x-6 grid-row-3 my-6">
         <p>
-          <span className="text-gray-500 text-xs font-bold">Start</span>
+          <span className="input-headline">Start</span>
           <br></br>
           <label>
             <input
@@ -78,7 +78,7 @@ function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
           </label>
         </p>
         <p>
-          <span className="text-gray-500 text-xs font-bold">Ende</span>
+          <span className="input-headline">Ende</span>
           <br></br>
           <label>
             <input
@@ -114,7 +114,7 @@ function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
       <div>
         <p>
           <label>
-            <span className="text-gray-500 text-xs font-bold">Ort</span>
+            <span className="input-headline">Ort</span>
             <br></br>
             <input
               className="bg-gray-100 rounded py-2 px-4 w-full mb-6"
@@ -128,7 +128,7 @@ function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
       </div>
       <div>
         <label>
-          <span className="text-gray-500 text-xs font-bold">Beschreibung</span>
+          <span className="input-headline">Beschreibung</span>
           <br></br>
           <textarea
             className="bg-gray-100 rounded py-2 px-4 w-full h-60 mb-6"
@@ -137,11 +137,7 @@ function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
           ></textarea>
         </label>
       </div>
-      <input
-        className="transition ease-in-out delay-100 bg-blue-700 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 px-4 py-1 rounded font-bold text-white text-sm"
-        type="submit"
-        value="Aktualisieren"
-      />
+      <input className="button" type="submit" value="Aktualisieren" />
     </form>
   );
 }

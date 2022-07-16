@@ -51,10 +51,7 @@ const Login = ({ setUser }) => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button
-          className="transition ease-in-out delay-100 bg-blue-700 hover:-translate-x-1 hover:scale-110 hover:bg-indigo-500 duration-300 px-4 py-1 rounded font-bold text-white text-sm"
-          type="submit"
-        >
+        <button className="button" type="submit">
           Einloggen
         </button>
       </form>

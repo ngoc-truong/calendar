@@ -76,7 +76,7 @@ const Event = ({
 
   return (
     // <div className="bg-white rounded-lg drop-shadow-2xl p-8 mb-8 bg-opacity-70 backdrop-blur-2xl border-white border">
-    <div className="bg-white p-8 rounded-lg drop-shadow-2xl border-white border">
+    <div className="card">
       <Drawer
         open={openEditEventDrawer}
         anchor={"right"}
@@ -90,8 +90,8 @@ const Event = ({
         />
       </Drawer>
       <div className="flex justify-between items-start">
-        <div className="mb-2">
-          <ul className="text-blue-700 font-semibold">
+        <div>
+          <ul className="over">
             {event.endTime ? (
               <li>
                 {format(parseISO(event.startDate), "EEEE, dd. MMMM yyyy", {
@@ -108,11 +108,9 @@ const Event = ({
               </li>
             )}
           </ul>
-          <h2 className="py-2 font-semibold text-xl text-gray-900">
-            {event.title}
-          </h2>
+          <h2 className="headline">{event.title}</h2>
           <ul className="mb-2">
-            <li className="text-gray-500 font-semibold">{event.location}</li>
+            <li className="subline text-gray-500">{event.location}</li>
           </ul>
         </div>
 
@@ -152,7 +150,7 @@ const Event = ({
 
           {event.description.length > 300 ? (
             <button
-              className="font-semibold mr-2 mt-4 flex items-center"
+              className="text-link"
               onClick={() => setTextIsOpen(!textIsOpen)}
             >
               Mehr anzeigen{" "}

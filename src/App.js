@@ -83,7 +83,7 @@ export default function App() {
       //   backgroundAttachment: "fixed",
       //   height: "100%",
       // }}
-      className="bg-gradient-to-r from-gray-100 to-gray-400 h-full"
+      className="background"
     >
       <NavBar
         user={user}
@@ -140,9 +140,7 @@ export default function App() {
                       onClick={() => setSelectedDay(day)}
                       className={classNames(
                         isEqual(day, selectedDay) && "text-white",
-                        !isEqual(day, selectedDay) &&
-                          isToday(day) &&
-                          "text-blue-600 ",
+                        !isEqual(day, selectedDay) && isToday(day) && "accent",
                         !isEqual(day, selectedDay) &&
                           !isToday(day) &&
                           isSameMonth(day, firstDayCurrentMonth) &&
@@ -151,9 +149,7 @@ export default function App() {
                           !isToday(day) &&
                           !isSameMonth(day, firstDayCurrentMonth) &&
                           "text-gray-400",
-                        isEqual(day, selectedDay) &&
-                          isToday(day) &&
-                          "bg-blue-700 hover:bg-blue-900",
+                        isEqual(day, selectedDay) && isToday(day) && "bg-green",
                         isEqual(day, selectedDay) &&
                           !isToday(day) &&
                           "bg-gray-900",
@@ -172,7 +168,7 @@ export default function App() {
                       {events.some((event) =>
                         isSameDay(parseISO(event.startDate), day)
                       ) && (
-                        <div className="w-1 h-1 rounded-full bg-indigo-500"></div>
+                        <div className="w-1 h-1 rounded-full bg-green"></div>
                       )}
                     </div>
                   </div>
@@ -211,11 +207,10 @@ export default function App() {
                   />
                 ))
               ) : (
-                <>
-                  <p className="bg-white p-8 rounded-lg drop-shadow-2xl bg-opacity-60 backdrop-blur-xl event-card">
-                    Keine Veranstaltungen heute 🥺
-                  </p>
-                </>
+                <div className="card">
+                  <h1 className="headline">Keine Veranstaltungen heute 🥺</h1>
+                  <p>Dann lass ma' Solo-Jazz üben!</p>
+                </div>
               )}
             </div>
           </section>
