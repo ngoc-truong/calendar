@@ -1,34 +1,22 @@
 import lindyEvents from "./lindy-events.json";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import {
   add,
   eachDayOfInterval,
   endOfMonth,
   format,
-  getDay,
-  isEqual,
   isSameDay,
-  isSameMonth,
-  isToday,
   parse,
   parseISO,
   startOfToday,
 } from "date-fns";
-import { de } from "date-fns/locale";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Event from "./components/Event";
 import EventForm from "./components/EventForm";
 import { Drawer } from "@mui/material";
 import NavBar from "./components/NavBar";
+import Calendar from "./components/Calendar";
 import lindyIllustration from "./assets/lindy-background.PNG";
-import background from "./assets/dance-shoes.jpg";
-import SignUp from "./components/Signup";
-import Login from "./components/Login";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function App() {
   let today = startOfToday();
@@ -75,108 +63,25 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      // style={{
-      //   backgroundImage: `url(${background})`,
-      //   backgroundRepeat: "no-repeat",
-      //   backgroundSize: "cover",
-      //   backgroundAttachment: "fixed",
-      //   height: "100%",
-      // }}
-      className="background"
-    >
+    <div className="background">
       <NavBar
         user={user}
         setUser={setUser}
         setOpenNewEventDrawer={setOpenNewEventDrawer}
         background={lindyIllustration}
       />
+
       <div>
         <div className="grid grid-cols-3 p-12 gap-x-8 font">
-          <div>
-            {/* <div className="bg-white p-8 rounded-lg drop-shadow-2xl bg-opacity-70 backdrop-blur-xl border-white border"> */}
-            <div className="bg-white p-8 rounded-lg drop-shadow-2xl border-white border">
-              <div className="flex items-center">
-                <h2 className="flex-auto font-semibold text-gray-900">
-                  {format(firstDayCurrentMonth, "MMMM yyyy", { locale: de })}
-                </h2>
-                <button
-                  type="button"
-                  onClick={previousMonth}
-                  className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-                >
-                  <span className="sr-only">Previous month</span>
-                  <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
-                </button>
-                <button
-                  onClick={nextMonth}
-                  type="button"
-                  className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-                >
-                  <span className="sr-only">Next month</span>
-                  <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
-                <div>MO</div>
-                <div>DI</div>
-                <div>MI</div>
-                <div>DO</div>
-                <div>FR</div>
-                <div>SA</div>
-                <div>SO</div>
-              </div>
-              <div className="grid grid-cols-7 mt-2 text-sm">
-                {days.map((day, dayIdx) => (
-                  <div
-                    key={day.toString()}
-                    className={classNames(
-                      dayIdx === 0 && colStartClasses[getDay(day)],
-                      "py-1.5"
-                    )}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setSelectedDay(day)}
-                      className={classNames(
-                        isEqual(day, selectedDay) && "text-white",
-                        !isEqual(day, selectedDay) && isToday(day) && "accent",
-                        !isEqual(day, selectedDay) &&
-                          !isToday(day) &&
-                          isSameMonth(day, firstDayCurrentMonth) &&
-                          "text-gray-900",
-                        !isEqual(day, selectedDay) &&
-                          !isToday(day) &&
-                          !isSameMonth(day, firstDayCurrentMonth) &&
-                          "text-gray-400",
-                        isEqual(day, selectedDay) && isToday(day) && "bg-green",
-                        isEqual(day, selectedDay) &&
-                          !isToday(day) &&
-                          "bg-gray-900",
-                        !isEqual(day, selectedDay) && "hover:bg-gray-200",
-                        (isEqual(day, selectedDay) || isToday(day)) &&
-                          "font-semibold",
-                        "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
-                      )}
-                    >
-                      <time dateTime={format(day, "yyyy-MM-dd")}>
-                        {format(day, "dd")}
-                      </time>
-                    </button>
-
-                    <div className="w-1 h-1 mx-auto mt-1">
-                      {events.some((event) =>
-                        isSameDay(parseISO(event.startDate), day)
-                      ) && (
-                        <div className="w-1 h-1 rounded-full bg-green"></div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
+          <Calendar
+            firstDayCurrentMonth={firstDayCurrentMonth}
+            previousMonth={previousMonth}
+            nextMonth={nextMonth}
+            days={days}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+            events={events}
+          />
           <section className="col-span-2 ">
             <div>
               <Drawer
@@ -219,13 +124,3 @@ export default function App() {
     </div>
   );
 }
-
-let colStartClasses = [
-  "col-start-7",
-  "col-start-1",
-  "col-start-2",
-  "col-start-3",
-  "col-start-4",
-  "col-start-5",
-  "col-start-6",
-];
