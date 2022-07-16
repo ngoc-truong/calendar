@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const Login = ({ setUser, setNotification }) => {
+const Login = ({ setUser, setError, setNotification }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,6 +28,14 @@ const Login = ({ setUser, setNotification }) => {
         return response.data;
       })
       .catch((error) => {
+        setNotification(
+          `Oh mademoiselle, irgendwas ist schief gelaufen: ${error.message}`
+        );
+        setError(true);
+        setTimeout(() => {
+          setError(null);
+          setNotification(null);
+        }, 8000);
         console.log(error);
       });
   };

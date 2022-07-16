@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
+import { isAfter, parseISO } from "date-fns";
 
 function EventForm({
   selectedDay,
@@ -17,6 +18,18 @@ function EventForm({
   const [endTime, setEndTime] = useState("23:00");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    if (isAfter(parseISO(startDate), parseISO(endDate))) {
+      setEndDate(startDate);
+    }
+  }, [startDate]);
+
+  useEffect(() => {
+    if (isAfter(parseISO(startDate), parseISO(endDate))) {
+      setStartDate(endDate);
+    }
+  }, [endDate]);
 
   const addEvent = (e) => {
     e.preventDefault();
@@ -45,6 +58,7 @@ function EventForm({
     setDescription("");
     setOpenNewEventDrawer(false);
     setNotification("Eine neue Veranstaltung wurde hinzugefügt.");
+    window.scrollTo(0, 0);
     setTimeout(() => {
       setNotification(null);
     }, 8000);

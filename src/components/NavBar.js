@@ -5,12 +5,14 @@ const NavBar = ({
   user,
   setUser,
   setNotification,
+  setError,
   setOpenNewEventDrawer,
   background,
 }) => {
   const logout = () => {
     window.localStorage.removeItem("loggedInUser");
     setNotification("Erfolgreich ausgeloggt, mademoiselle!");
+    window.scrollTo(0, 0);
     setTimeout(() => {
       setNotification(null);
     }, 8000);
@@ -22,7 +24,7 @@ const NavBar = ({
       <div className="logo text-xl text-gray-800">
         <div className="flex items-center">
           <img
-            className="nav-logo mt-2"
+            className="nav-logo mt-2 mb-2"
             src={background}
             alt="illustration dancers"
           />
@@ -37,7 +39,11 @@ const NavBar = ({
       </div>{" "}
       <div>
         {user === null && (
-          <Login setUser={setUser} setNotification={setNotification} />
+          <Login
+            setUser={setUser}
+            setNotification={setNotification}
+            setError={setError}
+          />
         )}
         {user !== null && (
           <div className="flex items-center gap-4">

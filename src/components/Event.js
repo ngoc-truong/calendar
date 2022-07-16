@@ -43,6 +43,7 @@ const Event = ({
           console.log(`Vorher waren's ${events.length} Events.`);
           setEvents(events.filter((event) => event.id !== id));
           setNotification("Das Event wurde gelöscht!");
+          window.scrollTo(0, 0);
           setTimeout(() => {
             setNotification(null);
           }, 8000);

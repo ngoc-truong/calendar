@@ -26,6 +26,7 @@ export default function App() {
   let [openNewEventDrawer, setOpenNewEventDrawer] = useState(false);
   let [openEditEventDrawer, setOpenEditEventDrawer] = useState(false);
   const [notification, setNotification] = useState(null);
+  const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
 
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
@@ -69,11 +70,12 @@ export default function App() {
         user={user}
         setUser={setUser}
         setNotification={setNotification}
+        setError={setError}
         setOpenNewEventDrawer={setOpenNewEventDrawer}
         background={lindyIllustration}
       />
       {notification && (
-        <Alert severity="success" className="alert">
+        <Alert severity={error ? "error" : "success"} className="alert">
           {notification}
         </Alert>
       )}

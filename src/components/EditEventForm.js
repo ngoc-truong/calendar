@@ -47,6 +47,7 @@ function EditEventForm({
           events.map((event) => (event.id !== id ? event : response.data))
         );
         setNotification("Das Event wurde aktualisiert.");
+        window.scrollTo(0, 0);
         setTimeout(() => {
           setNotification(null);
         }, 8000);
