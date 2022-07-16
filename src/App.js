@@ -16,6 +16,7 @@ import EventForm from "./components/EventForm";
 import { Drawer, Alert } from "@mui/material";
 import NavBar from "./components/NavBar";
 import Calendar from "./components/Calendar";
+import Header from "./components/Header";
 import lindyIllustration from "./assets/lindy-background.PNG";
 
 export default function App() {
@@ -46,6 +47,8 @@ export default function App() {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
+  // If an event has a start and end date, show the event in all days
+  // date-fns: https://date-fns.org/v2.28.0/docs/eachDayOfInterval
   let selectedDayEvents = events.filter((event) =>
     isSameDay(parseISO(event.startDate), selectedDay)
   );
@@ -79,6 +82,7 @@ export default function App() {
           {notification}
         </Alert>
       )}
+      <Header />
 
       <div>
         <div className="background-color grid grid-cols-3 p-12 gap-x-8 font">

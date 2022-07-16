@@ -204,3 +204,45 @@ textarea:focus {
   padding-bottom: 1em !important;
   letter-spacing: 0.13em !important;
 }
+
+.header {
+  height: 14rem;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+.header img {
+  height: 14rem;
+  width: 100%;
+  object-fit: cover;
+  object-position: 0 37%;
+  filter: sepia(0.1);
+  display: block;
+}
+
+.caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--textOnDark);
+  font-weight: 900;
+  letter-spacing: 3.5rem;
+  font-size: 3rem;
+  -webkit-animation: name 8s infinite;
+}
+
+@keyframes name {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
