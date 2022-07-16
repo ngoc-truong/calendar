@@ -14,6 +14,8 @@ In addition only registered users can update, delete or create new events.
 
 ## Screenshots
 
-![Screenshot of lindy hop calender](https://github.com/ngoc-truong/calendar/blob/main/src/assets/Screenshot_Calendar.png)
+- Screenshot of Lindy Hop Calendar
+  ![Screenshot of lindy hop calender](https://github.com/ngoc-truong/calendar/blob/main/src/assets/Screenshot_Calendar.png)
 
-![Screenshot of new event form](https://github.com/ngoc-truong/calendar/blob/main/src/assets/Screenshot_NewEvent.png)
+- Screenshot of new event form
+  ![Screenshot of new event form](https://github.com/ngoc-truong/calendar/blob/main/src/assets/Screenshot_NewEvent.png)
