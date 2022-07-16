@@ -11,3 +11,9 @@ In addition only registered users can update, delete or create new events.
 - Date fns
 - Tailwind CSS
 - json-server and json-server-auth for a mock server and basic authentification
+
+## Screenshots
+
+![Screenshot of lindy hop calender](https://github.com/ngoc-truong/calendar/blob/main/src/assets/Screenshot_Calendar.png)
+
+![Screenshot of new event form](https://github.com/ngoc-truong/calendar/blob/main/src/assets/Screenshot_NewEvent.png)
