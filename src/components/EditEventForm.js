@@ -1,7 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 
-function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
+function EditEventForm({
+  id,
+  events,
+  setEvents,
+  setNotification,
+  setOpenEditEventDrawer,
+}) {
   let myEvent = events.filter((event) => event.id === id);
   myEvent = myEvent[0];
   console.log(myEvent);
@@ -40,6 +46,10 @@ function EditEventForm({ id, events, setEvents, setOpenEditEventDrawer }) {
         setEvents(
           events.map((event) => (event.id !== id ? event : response.data))
         );
+        setNotification("Das Event wurde aktualisiert.");
+        setTimeout(() => {
+          setNotification(null);
+        }, 8000);
         return response.data;
       })
       .catch((error) => {

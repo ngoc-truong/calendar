@@ -3,7 +3,13 @@ import { format } from "date-fns";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 
-function EventForm({ selectedDay, events, setEvents, setOpenNewEventDrawer }) {
+function EventForm({
+  selectedDay,
+  events,
+  setEvents,
+  setNotification,
+  setOpenNewEventDrawer,
+}) {
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState(format(selectedDay, "yyyy-MM-dd"));
   const [startTime, setStartTime] = useState("20:00");
@@ -38,6 +44,10 @@ function EventForm({ selectedDay, events, setEvents, setOpenNewEventDrawer }) {
     setLocation("");
     setDescription("");
     setOpenNewEventDrawer(false);
+    setNotification("Eine neue Veranstaltung wurde hinzugefügt.");
+    setTimeout(() => {
+      setNotification(null);
+    }, 8000);
 
     axios
       .post(`http://localhost:3001/events`, newEvent)

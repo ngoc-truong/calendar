@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, setNotification }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,6 +21,10 @@ const Login = ({ setUser }) => {
         );
         setEmail("");
         setPassword("");
+        setNotification("Willkommen, du hast dich erfolgreich eingeloggt.");
+        setTimeout(() => {
+          setNotification(null);
+        }, 8000);
         return response.data;
       })
       .catch((error) => {

@@ -16,6 +16,7 @@ const Event = ({
   id,
   events,
   setEvents,
+  setNotification,
   openEditEventDrawer,
   setOpenEditEventDrawer,
 }) => {
@@ -41,6 +42,10 @@ const Event = ({
         .then((response) => {
           console.log(`Vorher waren's ${events.length} Events.`);
           setEvents(events.filter((event) => event.id !== id));
+          setNotification("Das Event wurde gelöscht!");
+          setTimeout(() => {
+            setNotification(null);
+          }, 8000);
           return console.log(response);
         })
         .catch((error) => {
@@ -87,6 +92,7 @@ const Event = ({
           events={events}
           setEvents={setEvents}
           setOpenEditEventDrawer={setOpenEditEventDrawer}
+          setNotification={setNotification}
         />
       </Drawer>
       <div className="flex justify-between items-start">

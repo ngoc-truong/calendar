@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Event from "./components/Event";
 import EventForm from "./components/EventForm";
-import { Drawer } from "@mui/material";
+import { Drawer, Alert } from "@mui/material";
 import NavBar from "./components/NavBar";
 import Calendar from "./components/Calendar";
 import lindyIllustration from "./assets/lindy-background.PNG";
@@ -25,6 +25,7 @@ export default function App() {
   let [events, setEvents] = useState(lindyEvents.events);
   let [openNewEventDrawer, setOpenNewEventDrawer] = useState(false);
   let [openEditEventDrawer, setOpenEditEventDrawer] = useState(false);
+  const [notification, setNotification] = useState(null);
   const [user, setUser] = useState(null);
 
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
@@ -67,9 +68,15 @@ export default function App() {
       <NavBar
         user={user}
         setUser={setUser}
+        setNotification={setNotification}
         setOpenNewEventDrawer={setOpenNewEventDrawer}
         background={lindyIllustration}
       />
+      {notification && (
+        <Alert severity="success" className="alert">
+          {notification}
+        </Alert>
+      )}
 
       <div>
         <div className="background-color grid grid-cols-3 p-12 gap-x-8 font">
@@ -94,6 +101,7 @@ export default function App() {
                   events={events}
                   setEvents={setEvents}
                   setOpenNewEventDrawer={setOpenNewEventDrawer}
+                  setNotification={setNotification}
                 />
               </Drawer>
             </div>
@@ -107,6 +115,7 @@ export default function App() {
                     event={event}
                     events={events}
                     setEvents={setEvents}
+                    setNotification={setNotification}
                     openEditEventDrawer={openEditEventDrawer}
                     setOpenEditEventDrawer={setOpenEditEventDrawer}
                   />

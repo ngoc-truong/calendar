@@ -1,9 +1,19 @@
 import Login from "./Login";
 import { LogoutIcon } from "@heroicons/react/outline";
 
-const NavBar = ({ user, setUser, setOpenNewEventDrawer, background }) => {
+const NavBar = ({
+  user,
+  setUser,
+  setNotification,
+  setOpenNewEventDrawer,
+  background,
+}) => {
   const logout = () => {
     window.localStorage.removeItem("loggedInUser");
+    setNotification("Erfolgreich ausgeloggt, mademoiselle!");
+    setTimeout(() => {
+      setNotification(null);
+    }, 8000);
     setUser(null);
   };
 
@@ -26,7 +36,9 @@ const NavBar = ({ user, setUser, setOpenNewEventDrawer, background }) => {
         </div>
       </div>{" "}
       <div>
-        {user === null && <Login setUser={setUser} />}
+        {user === null && (
+          <Login setUser={setUser} setNotification={setNotification} />
+        )}
         {user !== null && (
           <div className="flex items-center gap-4">
             <button
