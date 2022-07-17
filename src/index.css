@@ -10,7 +10,8 @@
   --textOnLight: #333333;
   --accent: #7cc8cb;
   --accentButton: #7cc8cb;
-  --hoverButton: #477576;
+  --hoverButton: #23a5a8;
+  --background: #efefef;
 }
 
 html {
@@ -54,21 +55,15 @@ code {
 }
 
 .background {
-  background-color: #efefef;
+  background-color: var(--background);
   height: 100%;
 }
 
 .background-color {
-  background-color: #efefef;
+  background-color: var(--background);
 }
 
 .card {
-  box-shadow: 85px 85px 58px rgba(0, 0, 0, 0.0334),
-    35.51px 35.511px 24.231px rgba(0, 0, 0, 0.024),
-    18.99px 18.9859px 12.9551px rgba(0, 0, 0, 0.0198),
-    10.64px 10.6433px 7.2625px rgba(0, 0, 0, 0.0166),
-    5.65px 5.65259px 3.85706px rgba(0, 0, 0, 0.0134),
-    2.35px 2.35217px 1.60501px rgba(0, 0, 0, 0.0094);
   background-color: white;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -114,15 +109,8 @@ code {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-color: white;
   padding-left: 3rem;
   padding-right: 3rem;
-  box-shadow: 85px 85px 58px rgba(0, 0, 0, 0.0334),
-    35.51px 35.511px 24.231px rgba(0, 0, 0, 0.024),
-    18.99px 18.9859px 12.9551px rgba(0, 0, 0, 0.0198),
-    10.64px 10.6433px 7.2625px rgba(0, 0, 0, 0.0166),
-    5.65px 5.65259px 3.85706px rgba(0, 0, 0, 0.0134),
-    2.35px 2.35217px 1.60501px rgba(0, 0, 0, 0.0094);
 }
 
 .logout {
@@ -198,11 +186,11 @@ textarea:focus {
 }
 
 .alert {
-  padding-left: 3.5em !important;
-  padding-right: 3.5em !important;
-  padding-top: 1em !important;
-  padding-bottom: 1em !important;
-  letter-spacing: 0.13em !important;
+  padding-left: 10rem !important;
+  padding-right: 10rem !important;
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+  letter-spacing: 0.13rem !important;
 }
 
 .header {

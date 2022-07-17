@@ -22,6 +22,7 @@ const Event = ({
 }) => {
   const [textIsOpen, setTextIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [eventId, setEventId] = useState(id);
   const menuOpen = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -82,7 +83,7 @@ const Event = ({
 
   return (
     // <div className="bg-white rounded-lg drop-shadow-2xl p-8 mb-8 bg-opacity-70 backdrop-blur-2xl border-white border">
-    <div className="card">
+    <div className="card drop-shadow-2xl">
       <Drawer
         open={openEditEventDrawer}
         anchor={"right"}
@@ -96,6 +97,7 @@ const Event = ({
           setNotification={setNotification}
         />
       </Drawer>
+
       <div className="flex justify-between items-start">
         <div>
           <ul className="over">

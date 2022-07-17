@@ -84,8 +84,8 @@ export default function App() {
       )}
       <Header />
 
-      <div>
-        <div className="background-color grid grid-cols-3 p-12 gap-x-8 font">
+      <div className="background-color flex place-content-center">
+        <div className="background-color grid grid-cols-3 p-12 gap-x-8 font w-full max-w-7xl">
           <Calendar
             firstDayCurrentMonth={firstDayCurrentMonth}
             previousMonth={previousMonth}

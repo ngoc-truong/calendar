@@ -37,7 +37,7 @@ const Calendar = ({
   return (
     <div>
       {/* <div className="bg-white p-8 rounded-lg drop-shadow-2xl bg-opacity-70 backdrop-blur-xl border-white border"> */}
-      <div className="bg-white p-8 rounded-lg drop-shadow-2xl border-white border">
+      <div className="calendar bg-white p-8 rounded-lg drop-shadow-2xl border-white border">
         <div className="flex items-center">
           <h2 className="flex-auto font-semibold text-gray-900">
             {format(firstDayCurrentMonth, "MMMM yyyy", { locale: de })}

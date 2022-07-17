@@ -2,7 +2,7 @@ import background from "../assets/lindy-dancers-copy.jpg";
 
 const Header = () => {
   return (
-    <div className="header">
+    <div className="header drop-shadow-2xl">
       <img src={background} alt="illustration dancers" />
 
       <div className="caption">
